@@ -2,7 +2,10 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  scrollbar-width: none;
 }
+
+/* Remove scroll, but maintain functionality */
 
 body {
   min-height: 100vh;
@@ -16,7 +19,9 @@ body {
   width: 500px;
   display: flex;
   flex-direction: column;
-  background-color: lightblue;
+  background-color: dodgerblue;
+  border-radius: 1rem;
+  padding: 2rem;
 }
 
 .row {
@@ -24,6 +29,13 @@ body {
   display: flex;
 }
 
+#display-window {
+  background-color: #5dbb63; /* Fern Green #5dbb63 Parakeet Green: #03c04a*/
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+}
+
 .button {
   flex: 1;
+  border-radius: 1rem;
 }
