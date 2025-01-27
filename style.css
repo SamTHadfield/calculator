@@ -12,6 +12,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #2f4f4f;
 }
 
 #container {
@@ -19,10 +20,10 @@ body {
   width: 500px;
   display: flex;
   flex-direction: column;
-  background-color: rgb(41, 98, 255); /* rgb(41, 98, 255);*/
+  background-color: #0e1428; /* rgb(41, 98, 255);*/
   border-radius: 1rem;
   padding: 2rem;
-  border: 0.1rem firebrick solid;
+  border: 0.1rem #d95d39 solid;
 }
 
 .row {
@@ -31,11 +32,18 @@ body {
 }
 
 #display-window {
-  background-color: #5dbb63; /* Fern Green #5dbb63 Parakeet Green: #03c04a  */
+  /* background-color: #5dbb63; Fern Green #5dbb63 Parakeet Green: #03c04a  */
+  background-color: #7b9e89;
+  color: #0e1428;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  font-size: 5rem;
   padding-bottom: 1rem;
+  padding-right: 1rem;
   margin-bottom: 2rem;
   border-radius: 1rem;
-  border: 0.1rem firebrick solid;
+  border: 0.1rem #d95d39 solid;
 }
 
 .button {
@@ -43,15 +51,24 @@ body {
   border-radius: 1rem;
   font-size: 2rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: rgb(41, 98, 255);
+  background-color: #f0a202;
+  color: #0e1428;
 }
 
-.red-button {
-  background-color: #b22222;
-  color: white;
+.operator-button {
+  background-color: #d95d39;
 }
 
 /* Colors
-• Blue - rgb(41, 98, 255)
-• Red - rgb(33, 39, 47)
+Color Palette
+• Gamboge - #F0A202
+• Tangerine - #F18805
+• Cinnabar - #D95D39
+• Oxford Blue - #0E1428
+• Cambridge Blue - #7B9E89
+
+Background Color Options
+• Charcoal Gray - #333333
+• Dark Slate Gray - #2F4F4F
+• Oxford Blue - #0E1428
 */
