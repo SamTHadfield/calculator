@@ -15,13 +15,14 @@ body {
 }
 
 #container {
-  height: 500px;
+  height: 650px;
   width: 500px;
   display: flex;
   flex-direction: column;
   background-color: rgb(41, 98, 255); /* rgb(41, 98, 255);*/
   border-radius: 1rem;
   padding: 2rem;
+  border: 0.1rem firebrick solid;
 }
 
 .row {
@@ -31,8 +32,10 @@ body {
 
 #display-window {
   background-color: #5dbb63; /* Fern Green #5dbb63 Parakeet Green: #03c04a  */
-  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
   border-radius: 1rem;
+  border: 0.1rem firebrick solid;
 }
 
 .button {
