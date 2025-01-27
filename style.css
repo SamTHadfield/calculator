@@ -19,7 +19,7 @@ body {
   width: 500px;
   display: flex;
   flex-direction: column;
-  background-color: dodgerblue;
+  background-color: rgb(41, 98, 255); /* rgb(41, 98, 255);*/
   border-radius: 1rem;
   padding: 2rem;
 }
@@ -30,7 +30,7 @@ body {
 }
 
 #display-window {
-  background-color: #5dbb63; /* Fern Green #5dbb63 Parakeet Green: #03c04a*/
+  background-color: #5dbb63; /* Fern Green #5dbb63 Parakeet Green: #03c04a  */
   margin-bottom: 1rem;
   border-radius: 1rem;
 }
@@ -38,4 +38,17 @@ body {
 .button {
   flex: 1;
   border-radius: 1rem;
+  font-size: 2rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgb(41, 98, 255);
 }
+
+.red-button {
+  background-color: #b22222;
+  color: white;
+}
+
+/* Colors
+• Blue - rgb(41, 98, 255)
+• Red - rgb(33, 39, 47)
+*/
