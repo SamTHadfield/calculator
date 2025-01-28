@@ -1,6 +1,8 @@
 let firstNum;
 let operator;
 let secondNum;
+let display = 0;
+// console.log(typeof display);
 
 // Math Operator Helper Functions
 function add(firstNum, secondNum) {
@@ -27,4 +29,11 @@ function operate(firstNum, operator, secondNum) {
   divide(firstNum, secondNum);
 }
 
-operate(firstNum, operator, secondNum);
+// Populate Display
+function populateDisplay(e) {
+  console.log(e.target.value);
+}
+
+// Event Listeners
+const buttons = Array.from(document.querySelectorAll(".button"));
+buttons.forEach((button) => button.addEventListener("click", populateDisplay));
