@@ -55,7 +55,11 @@ body {
   color: #0e1428;
 }
 
-.operator-button {
+.background-button {
+  background-color: #d95d39;
+}
+
+.arith-button {
   background-color: #d95d39;
 }
 
