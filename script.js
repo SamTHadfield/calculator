@@ -1,7 +1,8 @@
-let firstNum;
-let operator;
-let secondNum;
-let display = 0;
+let firstNum = "";
+let operator = "+";
+let secondNum = "";
+let displayWindow = document.querySelector("#display-window");
+
 // console.log(typeof display);
 
 // Math Operator Helper Functions
@@ -29,11 +30,36 @@ function operate(firstNum, operator, secondNum) {
   divide(firstNum, secondNum);
 }
 
-// Populate Display
-function populateDisplay(e) {
-  console.log(e.target.value);
-}
+///////////////////////
+// Button Functions //
+//////////////////////
+// function numberButton(button) {
+//   const buttonValue = button.target.value;
 
-// Event Listeners
-const buttons = Array.from(document.querySelectorAll(".button"));
-buttons.forEach((button) => button.addEventListener("click", populateDisplay));
+//   if (displayWindow.innerText === "0") displayWindow.innerText = " ";
+//   if (operator === "") firstNum += buttonValue;
+//   if (operator !== "") secondNum += buttonValue;
+//   displayWindow.innerText += buttonValue;
+// }
+
+//////////////////////
+// Event Listeners //
+/////////////////////
+
+// Number Buttons
+const numberButtons = Array.from(document.querySelectorAll(".number-button"));
+numberButtons.forEach((button) =>
+  button.addEventListener("click", numberButton)
+);
+
+// Arithmetic Operator Buttons
+const arithButtons = Array.from(document.querySelectorAll(".arith-button"));
+arithButtons.forEach((button) =>
+  button.addEventListener("click", arithmeticButton)
+);
+
+// Background Operator Buttons
+const backButtons = Array.from(document.querySelectorAll(".background-button"));
+backButtons.forEach((button) =>
+  button.addEventListener("click", backgroundButton)
+);
