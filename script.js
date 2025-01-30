@@ -6,27 +6,36 @@ let displayWindow = document.querySelector("#display-window");
 // console.log(typeof display);
 
 // Math Operator Helper Functions
-function add(firstNumber, secondNumber) {
-  const totalNumber = firstNumber + secondNumber;
+function operatorResult(totalNumber) {
   displayWindow.innerText = totalNumber;
   firstNumStr = totalNumber;
   secondNumStr = "";
   operatorStr = "";
+}
+
+function add(firstNumber, secondNumber) {
+  const totalNumber = firstNumber + secondNumber;
+  operatorResult(totalNumber);
 }
 
 function subtract(firstNumber, secondNumber) {
   const totalNumber = firstNumber - secondNumber;
-  displayWindow.innerText = totalNumber;
-  firstNumStr = totalNumber;
-  secondNumStr = "";
-  operatorStr = "";
+  operatorResult(totalNumber);
 }
 
-function multiply(firstNumber, secondNumber) {}
+function multiply(firstNumber, secondNumber) {
+  const totalNumber = firstNumber * secondNumber;
+  operatorResult(totalNumber);
+}
 
-function divide(firstNumber, secondNumber) {}
+function divide(firstNumber, secondNumber) {
+  const totalNumber = firstNumber / secondNumber;
+  operatorResult(totalNumber);
+}
 
-function percentage(firstNumber, secondNumber) {}
+function percentage(firstNumber, secondNumber) {
+  // START HERE on 01/31
+}
 
 // Operate Function
 function operate() {
@@ -40,11 +49,16 @@ function operate() {
     case "–":
       subtract(firstNumber, secondNumber);
       break;
+    case "*":
+      multiply(firstNumber, secondNumber);
+      break;
+    case "÷":
+      divide(firstNumber, secondNumber);
+      break;
+    case "%":
+      percentage(firstNumber, secondNumber);
+      break;
   }
-
-  // subtract(firstNum, secondNum);
-  // multiply(firstNum, secondNum);
-  // divide(firstNum, secondNum);
 }
 
 ///////////////////////
