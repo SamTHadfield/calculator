@@ -1,37 +1,41 @@
-let firstNum = "";
-let operator = "";
-let secondNum = "";
+let firstNumStr = "";
+let operatorStr = "";
+let secondNumStr = "";
 let displayWindow = document.querySelector("#display-window");
 
 // console.log(typeof display);
 
 // Math Operator Helper Functions
-function add(firstNum, secondNum) {
-  return firstNum + secondNum;
+function add(firstNumber, secondNumber) {
+  const totalNumber = firstNumber + secondNumber;
+  displayWindow.innerText = totalNumber;
+  firstNumStr = totalNumber;
+  operatorStr = "";
+  secondNumStr = "";
 }
 
-function subtract(firstNum, secondNum) {
-  return firstNum - secondNum;
-}
+function subtract(firstNumber, secondNumber) {}
 
-function multiply(firstNum, secondNum) {
-  return firstNum * secondNum;
-}
+function multiply(firstNumber, secondNumber) {}
 
-function divide(firstNum, secondNum) {
-  return firstNum / secondNum;
-}
+function divide(firstNumber, secondNumber) {}
 
-function percentage(firstNum, secondNum) {
-  return firstNum % secondNum;
-}
+function percentage(firstNumber, secondNumber) {}
 
 // Operate Function
-function operate(firstNum, operator, secondNum) {
-  add(firstNum, secondNum);
-  subtract(firstNum, secondNum);
-  multiply(firstNum, secondNum);
-  divide(firstNum, secondNum);
+function operate() {
+  const firstNumber = Number(firstNumStr);
+  const secondNumber = Number(secondNumStr);
+
+  switch (operatorStr) {
+    case "+":
+      add(firstNumber, secondNumber);
+      break;
+  }
+
+  // subtract(firstNum, secondNum);
+  // multiply(firstNum, secondNum);
+  // divide(firstNum, secondNum);
 }
 
 ///////////////////////
@@ -52,8 +56,8 @@ function updateDisplayNumber(buttonValue) {
 }
 
 function storeNumber(buttonValue) {
-  if (operator === "") firstNum += buttonValue;
-  if (operator !== "") secondNum += buttonValue;
+  if (operatorStr === "") firstNumStr += buttonValue;
+  if (operatorStr !== "") secondNumStr += buttonValue;
 }
 
 function numberButton(button) {
@@ -64,11 +68,11 @@ function numberButton(button) {
 
 // Arithmetic Operator Button Functions
 function updateDisplayArithOperator(buttonValue) {
-  if (operator === "") displayWindow.innerText += buttonValue;
+  if (operatorStr === "") displayWindow.innerText += buttonValue;
 }
 
 function storeArithOperator(buttonValue) {
-  if (operator === "") operator = buttonValue;
+  if (operatorStr === "") operatorStr = buttonValue;
 }
 
 function arithOperatorButton(button) {
@@ -80,9 +84,9 @@ function arithOperatorButton(button) {
 // Background Operator Button Functions
 function allClear() {
   displayWindow.innerText = "0";
-  firstNum = "";
-  operator = "";
-  secondNum = "";
+  firstNumStr = "";
+  operatorStr = "";
+  secondNumStr = "";
 }
 
 function togglePosOrNeg() {
@@ -106,7 +110,9 @@ function backspace() {
   }
 }
 
-function equals() {}
+function equals() {
+  operate();
+}
 
 function backgroundOperatorButton(button) {
   const buttonValue = button.target.value;
@@ -122,7 +128,7 @@ function backgroundOperatorButton(button) {
       backspace();
       break;
     case "=":
-      equals;
+      equals();
       break;
   }
 }
