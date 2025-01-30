@@ -35,7 +35,7 @@ function operate(firstNum, operator, secondNum) {
 //////////////////////
 
 // Number Button Functions
-function updateDisplay(buttonValue) {
+function updateDisplayNumber(buttonValue) {
   if (displayWindow.innerText === "0" && buttonValue !== ".") {
     displayWindow.innerText = buttonValue;
   } else if (displayWindow.innerText === "0" && buttonValue === ".") {
@@ -54,11 +54,25 @@ function storeNumber(buttonValue) {
 
 function numberButton(button) {
   const buttonValue = button.target.value;
-  updateDisplay(buttonValue);
+  updateDisplayNumber(buttonValue);
   storeNumber(buttonValue);
 }
 
 // Arithmetic Button Functions
+
+function updateDisplayArithOperator(buttonValue) {
+  if (operator === "") displayWindow.innerText += buttonValue;
+}
+
+function storeArithOperator(buttonValue) {
+  if (operator === "") operator = buttonValue;
+}
+
+function arithOperatorButton(button) {
+  const buttonValue = button.target.value;
+  updateDisplayArithOperator(buttonValue);
+  storeArithOperator(buttonValue);
+}
 
 //////////////////////
 // Event Listeners //
@@ -71,10 +85,10 @@ numberButtons.forEach((button) =>
 );
 
 // Arithmetic Button Event Listeners
-// const arithButtons = Array.from(document.querySelectorAll(".arith-button"));
-// arithButtons.forEach((button) =>
-//   button.addEventListener("click", arithmeticButton)
-// );
+const arithButtons = Array.from(document.querySelectorAll(".arith-button"));
+arithButtons.forEach((button) =>
+  button.addEventListener("click", arithOperatorButton)
+);
 
 // Background Operator Buttons
 // const backButtons = Array.from(document.querySelectorAll(".background-button"));
