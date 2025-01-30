@@ -90,7 +90,17 @@ function togglePosOrNeg() {
   // Try to accomplish this task with toggle
 }
 
-function backspace() {}
+function backspace() {
+  const str = displayWindow.innerText;
+  const arr = str.split("");
+  arr.pop();
+  const newStr = arr.join("");
+  displayWindow.innerText = newStr;
+
+  if (displayWindow.innerText === "") {
+    displayWindow.innerText = "0";
+  }
+}
 
 function equals() {}
 
