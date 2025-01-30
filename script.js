@@ -14,7 +14,13 @@ function add(firstNumber, secondNumber) {
   operatorStr = "";
 }
 
-function subtract(firstNumber, secondNumber) {}
+function subtract(firstNumber, secondNumber) {
+  const totalNumber = firstNumber - secondNumber;
+  displayWindow.innerText = totalNumber;
+  firstNumStr = totalNumber;
+  secondNumStr = "";
+  operatorStr = "";
+}
 
 function multiply(firstNumber, secondNumber) {}
 
@@ -30,6 +36,9 @@ function operate() {
   switch (operatorStr) {
     case "+":
       add(firstNumber, secondNumber);
+      break;
+    case "–":
+      subtract(firstNumber, secondNumber);
       break;
   }
 
