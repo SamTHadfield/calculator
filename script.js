@@ -58,8 +58,7 @@ function numberButton(button) {
   storeNumber(buttonValue);
 }
 
-// Arithmetic Button Functions
-
+// Arithmetic Operator Button Functions
 function updateDisplayArithOperator(buttonValue) {
   if (operator === "") displayWindow.innerText += buttonValue;
 }
@@ -74,6 +73,46 @@ function arithOperatorButton(button) {
   storeArithOperator(buttonValue);
 }
 
+// Background Operator Button Functions
+function allClear() {
+  displayWindow.innerText = "0";
+  firstNum = "";
+  operator = "";
+  secondNum = "";
+}
+
+function togglePosOrNeg() {
+  // Needs to add or remove "(- )" from number
+  // May need to use "insertBefore/insertAfter" to accomplish this
+  // Whether toggling firstNum or secondNum, will need to add or remove the "(– )"
+  //// from display as well as global variable
+  // Cannot add to an arithmetic operator, only a number
+  // Try to accomplish this task with toggle
+}
+
+function backspace() {}
+
+function equals() {}
+
+function backgroundOperatorButton(button) {
+  const buttonValue = button.target.value;
+
+  switch (buttonValue) {
+    case "AC":
+      allClear();
+      break;
+    case "+/–":
+      togglePosOrNeg(buttonValue);
+      break;
+    case "back":
+      backspace();
+      break;
+    case "=":
+      equals;
+      break;
+  }
+}
+
 //////////////////////
 // Event Listeners //
 /////////////////////
@@ -84,14 +123,14 @@ numberButtons.forEach((button) =>
   button.addEventListener("click", numberButton)
 );
 
-// Arithmetic Button Event Listeners
+// Arithmetic Operator Button Event Listeners
 const arithButtons = Array.from(document.querySelectorAll(".arith-button"));
 arithButtons.forEach((button) =>
   button.addEventListener("click", arithOperatorButton)
 );
 
-// Background Operator Buttons
-// const backButtons = Array.from(document.querySelectorAll(".background-button"));
-// backButtons.forEach((button) =>
-//   button.addEventListener("click", backgroundButton)
-// );
+// Background Operator Button Event Listeners
+const backButtons = Array.from(document.querySelectorAll(".background-button"));
+backButtons.forEach((button) =>
+  button.addEventListener("click", backgroundOperatorButton)
+);
