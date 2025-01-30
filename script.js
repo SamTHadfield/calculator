@@ -1,5 +1,5 @@
 let firstNum = "";
-let operator = "+";
+let operator = "";
 let secondNum = "";
 let displayWindow = document.querySelector("#display-window");
 
@@ -33,33 +33,51 @@ function operate(firstNum, operator, secondNum) {
 ///////////////////////
 // Button Functions //
 //////////////////////
-// function numberButton(button) {
-//   const buttonValue = button.target.value;
 
-//   if (displayWindow.innerText === "0") displayWindow.innerText = " ";
-//   if (operator === "") firstNum += buttonValue;
-//   if (operator !== "") secondNum += buttonValue;
-//   displayWindow.innerText += buttonValue;
-// }
+// Number Button Functions
+function updateDisplay(buttonValue) {
+  if (displayWindow.innerText === "0" && buttonValue !== ".") {
+    displayWindow.innerText = buttonValue;
+  } else if (displayWindow.innerText === "0" && buttonValue === ".") {
+    displayWindow.innerText += buttonValue;
+  } else if (!displayWindow.innerText.includes(".") && buttonValue === ".") {
+    displayWindow.innerText += buttonValue;
+  } else if (displayWindow.innerText !== "0" && buttonValue !== ".") {
+    displayWindow.innerText += buttonValue;
+  }
+}
+
+function storeNumber(buttonValue) {
+  if (operator === "") firstNum += buttonValue;
+  if (operator !== "") secondNum += buttonValue;
+}
+
+function numberButton(button) {
+  const buttonValue = button.target.value;
+  updateDisplay(buttonValue);
+  storeNumber(buttonValue);
+}
+
+// Arithmetic Button Functions
 
 //////////////////////
 // Event Listeners //
 /////////////////////
 
-// Number Buttons
+// Number Button Event Listeners
 const numberButtons = Array.from(document.querySelectorAll(".number-button"));
 numberButtons.forEach((button) =>
   button.addEventListener("click", numberButton)
 );
 
-// Arithmetic Operator Buttons
-const arithButtons = Array.from(document.querySelectorAll(".arith-button"));
-arithButtons.forEach((button) =>
-  button.addEventListener("click", arithmeticButton)
-);
+// Arithmetic Button Event Listeners
+// const arithButtons = Array.from(document.querySelectorAll(".arith-button"));
+// arithButtons.forEach((button) =>
+//   button.addEventListener("click", arithmeticButton)
+// );
 
 // Background Operator Buttons
-const backButtons = Array.from(document.querySelectorAll(".background-button"));
-backButtons.forEach((button) =>
-  button.addEventListener("click", backgroundButton)
-);
+// const backButtons = Array.from(document.querySelectorAll(".background-button"));
+// backButtons.forEach((button) =>
+//   button.addEventListener("click", backgroundButton)
+// );
