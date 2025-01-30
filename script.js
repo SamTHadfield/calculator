@@ -10,8 +10,8 @@ function add(firstNumber, secondNumber) {
   const totalNumber = firstNumber + secondNumber;
   displayWindow.innerText = totalNumber;
   firstNumStr = totalNumber;
-  operatorStr = "";
   secondNumStr = "";
+  operatorStr = "";
 }
 
 function subtract(firstNumber, secondNumber) {}
