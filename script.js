@@ -22,6 +22,10 @@ function divide(firstNum, secondNum) {
   return firstNum / secondNum;
 }
 
+function percentage(firstNum, secondNum) {
+  return firstNum % secondNum;
+}
+
 // Operate Function
 function operate(firstNum, operator, secondNum) {
   add(firstNum, secondNum);
