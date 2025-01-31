@@ -71,7 +71,9 @@ function updateDisplayNumber(buttonValue) {
   if (buttonValue === ".") decimalException(buttonValue);
 
   if (displayWindow.innerText === "0") {
-    displayWindow.innerText = buttonValue;
+    displayWindow.innerText = firstNumStr;
+  } else if (operatorStr !== "") {
+    displayWindow.innerText = secondNumStr;
   } else if (displayWindow.innerText !== "0" && buttonValue !== ".") {
     displayWindow.innerText += buttonValue;
   }
