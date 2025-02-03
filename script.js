@@ -135,6 +135,22 @@ function togglePosOrNeg() {
   // Try to accomplish this task with toggle
 }
 
+function percentage() {
+  let realNum = 0;
+  let backToString = "";
+  if (operatorStr === "") {
+    realNum = Number(firstNumStr) / 100;
+    backToString = realNum.toString();
+    displayWindow.innerText = backToString;
+    firstNumStr = backToString;
+  } else if (operatorStr !== "") {
+    realNum = Number(secondNumStr) / 100;
+    backToString = realNum.toString();
+    displayWindow.innerText = backToString;
+    secondNumStr = backToString;
+  }
+}
+
 function removeLastValue(numString, displayWindow) {
   const displayArr = displayWindow.innerText.split("");
   displayArr.pop();
@@ -216,14 +232,8 @@ backButtons.forEach((button) =>
 // BUGS TO ADDRESS //
 /////////////////////
 
-// • CHECK BACKSPACE FIRST - BEGIN HERE ON MONDAY
-
-// • Decimal in secondNum - since I allowed decimal to appear in the display only once,
-//// user cannot add decimal to secondNum if decimal is already in firstNum.
-//// - TOP says to hold only one decimal in the display at given time.
-//// - Solution: Refactor the arithmetic operators to not appear in the display. They do
-////   need to be highlighted once they are clicked. Also need to refactor firstNum and
-////   secondNum so that only one can appear in the display at any given time.
+// • Refactor arithmetic buttons to highlight when clicked and remove highlight when
+//// clicked elsewhere
 
 // • Numbers run off display - If too many numbers are included in the display, the numbers
 //// will not scroll but rather run out the side of the container and off the page.
