@@ -126,13 +126,29 @@ function allClear() {
   secondNumStr = "";
 }
 
-function togglePosOrNeg() {
-  // Needs to add or remove "(- )" from number
-  // May need to use "insertBefore/insertAfter" to accomplish this
-  // Whether toggling firstNum or secondNum, will need to add or remove the "(– )"
-  //// from display as well as global variable
-  // Cannot add to an arithmetic operator, only a number
-  // Try to accomplish this task with toggle
+// Goals
+// 1. Divert to either firstNumStr or secondNumStr based on operator
+// 3. If firstNumStr or secondNumStr are not empty, need to be able to add "-" to an existing #
+// 4. Should only be able to add one "-" at a time.
+// 5. Need to be able to remove ("-") with click of a button
+// 6. If display is 0, do not push to global variable
+
+function toggleNum() {
+  // First Number
+  if (operatorStr === "" && firstNumStr !== "0" && !firstNumStr.includes("-")) {
+    firstNumStr = "-" + firstNumStr;
+    displayWindow.innerText = firstNumStr;
+  } else if (firstNumStr.includes("-")) {
+  }
+
+  // else if ()
+
+  // // Second Number
+  // else if (operatorStr !== "" && secondNumStr !== "0") {
+  //   secondNumStr = -secondNumStr;
+  //   displayWindow.innerText = String(secondNumStr);
+  //   // console.log(typeof secondNumStr);
+  // }
 }
 
 function percentage() {
@@ -192,7 +208,7 @@ function backgroundOperatorButton(button) {
       allClear();
       break;
     case "+/–":
-      togglePosOrNeg(buttonValue);
+      toggleNum();
       break;
     case "%":
       percentage();
@@ -231,6 +247,11 @@ backButtons.forEach((button) =>
 //////////////////////
 // BUGS TO ADDRESS //
 /////////////////////
+
+// • Global value variables should maybe be numbers not strings.
+
+// • Disable "0" from being placed in global variables all by itself. This should prevent
+//// successive 0s from being added to display without a leading number. But double check this.
 
 // • Refactor arithmetic buttons to highlight when clicked and remove highlight when
 //// clicked elsewhere
