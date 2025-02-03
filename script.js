@@ -135,27 +135,29 @@ function togglePosOrNeg() {
   // Try to accomplish this task with toggle
 }
 
-// function percentageResult(number) {
-//   let result = number / 100;
-//   let resultStr = result.toString();
-//   displayWindow.innerText = resultStr;
-// }
+function removeLastValue(numString, displayWindow) {
+  const displayArr = displayWindow.innerText.split("");
+  displayArr.pop();
+  const newDisplayStr = displayArr.join("");
+  displayWindow.innerText = newDisplayStr;
 
-// function percentage() {
-//   const firstNumber = Number(firstNumStr);
-//   const secondNumber = Number(secondNumStr);
+  const numStringArr = numString.split("");
+  numStringArr.pop();
+  const newNumStr = numStringArr.join("");
 
-//   operatorStr === ""
-//     ? (firstNumStr = percentageResult(firstNumber))
-//     : (secondNumStr = percentageResult(secondNumber));
-// }
+  if (operatorStr === "") {
+    firstNumStr = newNumStr;
+  } else if (operatorStr !== "") {
+    secondNumStr = newNumStr;
+  }
+}
 
 function backspace() {
-  const str = displayWindow.innerText;
-  const arr = str.split("");
-  arr.pop();
-  const newStr = arr.join("");
-  displayWindow.innerText = newStr;
+  if (operatorStr === "") {
+    removeLastValue(firstNumStr, displayWindow);
+  } else if (operatorStr !== "") {
+    removeLastValue(secondNumStr, displayWindow);
+  }
 
   if (displayWindow.innerText === "") {
     displayWindow.innerText = "0";
@@ -213,6 +215,8 @@ backButtons.forEach((button) =>
 //////////////////////
 // BUGS TO ADDRESS //
 /////////////////////
+
+// • CHECK BACKSPACE FIRST - BEGIN HERE ON MONDAY
 
 // • Decimal in secondNum - since I allowed decimal to appear in the display only once,
 //// user cannot add decimal to secondNum if decimal is already in firstNum.
