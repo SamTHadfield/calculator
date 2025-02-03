@@ -133,22 +133,29 @@ function allClear() {
 // 5. Need to be able to remove ("-") with click of a button
 // 6. If display is 0, do not push to global variable
 
-function toggleNum() {
-  // First Number
-  if (operatorStr === "" && firstNumStr !== "0" && !firstNumStr.includes("-")) {
+function toggleFirstNum() {
+  if (displayWindow.innerText !== "0" && !firstNumStr.includes("-")) {
     firstNumStr = "-" + firstNumStr;
     displayWindow.innerText = firstNumStr;
   } else if (firstNumStr.includes("-")) {
+    firstNumStr = firstNumStr.slice(1);
+    displayWindow.innerText = firstNumStr;
   }
+}
 
-  // else if ()
+function toggleSecondNum() {
+  if (secondNumStr !== "" && !secondNumStr.includes("-")) {
+    secondNumStr = "-" + secondNumStr;
+    displayWindow.innerText = secondNumStr;
+  } else if (secondNumStr.includes("-")) {
+    secondNumStr = secondNumStr.slice(1);
+    displayWindow.innerText = secondNumStr;
+  }
+}
 
-  // // Second Number
-  // else if (operatorStr !== "" && secondNumStr !== "0") {
-  //   secondNumStr = -secondNumStr;
-  //   displayWindow.innerText = String(secondNumStr);
-  //   // console.log(typeof secondNumStr);
-  // }
+function toggleNegative() {
+  if (operatorStr === "") toggleFirstNum();
+  if (operatorStr !== "") toggleSecondNum();
 }
 
 function percentage() {
@@ -208,7 +215,7 @@ function backgroundOperatorButton(button) {
       allClear();
       break;
     case "+/–":
-      toggleNum();
+      toggleNegative();
       break;
     case "%":
       percentage();
@@ -247,6 +254,8 @@ backButtons.forEach((button) =>
 //////////////////////
 // BUGS TO ADDRESS //
 /////////////////////
+
+// • Can add multiple decimals only in secondNum
 
 // • Global value variables should maybe be numbers not strings.
 
