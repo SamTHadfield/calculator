@@ -1,13 +1,13 @@
 let firstNumStr = "";
 let operatorStr = "";
 let secondNumStr = "";
-let displayWindow = document.querySelector("#display-window");
+let display = document.querySelector("#display-window");
 
 /////////////////////////////////////
 // Math Operator Helper Functions //
 ////////////////////////////////////
 function operatorResult(totalNumber) {
-  displayWindow.innerText = totalNumber;
+  display.innerText = totalNumber;
   firstNumStr = totalNumber;
   secondNumStr = "";
   operatorStr = "";
@@ -58,37 +58,61 @@ function operate() {
 // Button Functions //
 //////////////////////
 
+// Decimal exceptions
+// If variable is empty, we want variable to change to "0" + "."
+// If the variable already holds a decimal, we cannot add another to the variable
+
+// Zero exceptions
+// We cannot add a "0" to an empty variable
+// Zeros cannot come in succession by themselves (e.g. "00000000") unless after a decimal "0.0000"
+function storeNumber(buttonValue) {}
+
 function decimalException(buttonValue) {
-  if (displayWindow.innerText === "0") {
-    displayWindow.innerText += buttonValue;
-  } else if (!displayWindow.innerText.includes(".")) {
-    displayWindow.innerText += buttonValue;
+  if (display.innerText === "0") {
+    display.innerText += buttonValue;
+  } else if (display.innerText === "") {
+    buttonValue = "0" + buttonValue;
+    display.innerText = buttonValue;
+  } else if (!display.innerText.includes(buttonValue)) {
+    display.innerText += buttonValue;
   }
 }
 
-// Number Button Functions
-function updateDisplayNumber(buttonValue) {
-  if (buttonValue === ".") decimalException(buttonValue);
+function zeroException(buttonValue) {}
 
-  if (displayWindow.innerText === "0") {
-    displayWindow.innerText = firstNumStr;
-  } else if (operatorStr !== "") {
-    displayWindow.innerText = secondNumStr;
-  } else if (displayWindow.innerText !== "0" && buttonValue !== ".") {
-    displayWindow.innerText += buttonValue;
+function updateDisplayDefault(buttonValue) {
+  if (display.innerText === "0" || display.innerText === "") {
+    display.innerText = buttonValue;
+  } else if (display.innerText !== "0" && display.innerText !== "") {
+    display.innerText += buttonValue;
   }
 }
 
-function storeNumber(buttonValue) {
-  if (operatorStr === "") firstNumStr += buttonValue;
-  if (operatorStr !== "") secondNumStr += buttonValue;
+function updateDisplay(buttonValue) {
+  switch (buttonValue) {
+    case ".":
+      decimalException(buttonValue);
+      break;
+    case "0":
+      zeroException(buttonValue);
+      break;
+    default:
+      updateDisplayDefault(buttonValue);
+  }
+
+  // "." can't be used more than once
+  // "." must come after either a 0 or an integer
+  // "0" cannot be added if there is already a single "0" in display
+  // A single "0" in display will need to be replaced unless followed by a decimal
 }
 
 function numberButton(button) {
   const buttonValue = button.target.value;
-  storeNumber(buttonValue);
-  updateDisplayNumber(buttonValue);
+  updateDisplay(buttonValue);
 }
+
+// 1. If displayWindow.innerText is only "0"
+// 2. Cannot lead with "0" in secondNumber unless there is a decimal
 
 ///////////////////////////////////////////
 // Arithmetic Operator Button Functions //
@@ -119,37 +143,33 @@ function arithOperatorButton(button) {
 ///////////////////////////////////////////
 // Background Operator Button Functions //
 //////////////////////////////////////////
+
+// AC Button
 function allClear() {
-  displayWindow.innerText = "0";
+  display.innerText = "0";
   firstNumStr = "";
   operatorStr = "";
   secondNumStr = "";
 }
 
-// Goals
-// 1. Divert to either firstNumStr or secondNumStr based on operator
-// 3. If firstNumStr or secondNumStr are not empty, need to be able to add "-" to an existing #
-// 4. Should only be able to add one "-" at a time.
-// 5. Need to be able to remove ("-") with click of a button
-// 6. If display is 0, do not push to global variable
-
+// Toggle Button
 function toggleFirstNum() {
-  if (displayWindow.innerText !== "0" && !firstNumStr.includes("-")) {
+  if (display.innerText !== "0" && !firstNumStr.includes("-")) {
     firstNumStr = "-" + firstNumStr;
-    displayWindow.innerText = firstNumStr;
+    display.innerText = firstNumStr;
   } else if (firstNumStr.includes("-")) {
     firstNumStr = firstNumStr.slice(1);
-    displayWindow.innerText = firstNumStr;
+    display.innerText = firstNumStr;
   }
 }
 
 function toggleSecondNum() {
   if (secondNumStr !== "" && !secondNumStr.includes("-")) {
     secondNumStr = "-" + secondNumStr;
-    displayWindow.innerText = secondNumStr;
+    display.innerText = secondNumStr;
   } else if (secondNumStr.includes("-")) {
     secondNumStr = secondNumStr.slice(1);
-    displayWindow.innerText = secondNumStr;
+    display.innerText = secondNumStr;
   }
 }
 
@@ -158,27 +178,29 @@ function toggleNegative() {
   if (operatorStr !== "") toggleSecondNum();
 }
 
+// Percentage Button
 function percentage() {
   let realNum = 0;
   let backToString = "";
   if (operatorStr === "") {
     realNum = Number(firstNumStr) / 100;
     backToString = realNum.toString();
-    displayWindow.innerText = backToString;
+    display.innerText = backToString;
     firstNumStr = backToString;
   } else if (operatorStr !== "") {
     realNum = Number(secondNumStr) / 100;
     backToString = realNum.toString();
-    displayWindow.innerText = backToString;
+    display.innerText = backToString;
     secondNumStr = backToString;
   }
 }
 
-function removeLastValue(numString, displayWindow) {
-  const displayArr = displayWindow.innerText.split("");
+// Back Button
+function removeLastValue(numString, display) {
+  const displayArr = display.innerText.split("");
   displayArr.pop();
   const newDisplayStr = displayArr.join("");
-  displayWindow.innerText = newDisplayStr;
+  display.innerText = newDisplayStr;
 
   const numStringArr = numString.split("");
   numStringArr.pop();
@@ -193,16 +215,17 @@ function removeLastValue(numString, displayWindow) {
 
 function backspace() {
   if (operatorStr === "") {
-    removeLastValue(firstNumStr, displayWindow);
+    removeLastValue(firstNumStr, display);
   } else if (operatorStr !== "") {
-    removeLastValue(secondNumStr, displayWindow);
+    removeLastValue(secondNumStr, display);
   }
 
-  if (displayWindow.innerText === "") {
-    displayWindow.innerText = "0";
+  if (display.innerText === "") {
+    display.innerText = "0";
   }
 }
 
+// Equals button
 function equals() {
   operate();
 }
@@ -252,12 +275,13 @@ backButtons.forEach((button) =>
 );
 
 //////////////////////
-// BUGS TO ADDRESS //
+// BUGS TO ADDRESS & FEATURES TO ADD //
 /////////////////////
 
-// • Can add multiple decimals only in secondNum
+// • May look at refactoring "equals" switch case to go direct to operate function rather than
+//// through a middleman function.
 
-// • Global value variables should maybe be numbers not strings.
+// • Can add multiple decimals only in secondNum
 
 // • Disable "0" from being placed in global variables all by itself. This should prevent
 //// successive 0s from being added to display without a leading number. But double check this.
@@ -267,7 +291,7 @@ backButtons.forEach((button) =>
 
 // • Numbers run off display - If too many numbers are included in the display, the numbers
 //// will not scroll but rather run out the side of the container and off the page.
-//// - Solution: Look up a scroll option
+//// - Solution: Look up a scroll option, consult Project page in TOP
 
 // • Display flexes - Display flexes based on numbers.
 //// - Solution: Set display to static value. The issue here is that removing the flex may
@@ -278,3 +302,5 @@ backButtons.forEach((button) =>
 //// feature which needs to be added. If two number are ready to be totaled, should be able
 //// to hit any arithmetic operator and spit back the total - rather than requiring user to
 //// explicitly hit the equals button.
+
+// • Add keyboard support!
