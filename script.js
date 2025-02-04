@@ -65,22 +65,33 @@ function operate() {
 // Zero exceptions
 // We cannot add a "0" to an empty variable
 // Zeros cannot come in succession by themselves (e.g. "00000000") unless after a decimal "0.0000"
-function storeNumber(buttonValue) {}
+// function storeNumber(buttonValue) {
+//   if (operatorStr === "") {
+//     firstNumStr += buttonValue;
+//   }
+// }
 
 function decimalException(buttonValue) {
   if (display.innerText === "0") {
     display.innerText += buttonValue;
+    buttonValue = "0" + buttonValue;
+    storeNumber(buttonValue);
   } else if (display.innerText === "") {
     buttonValue = "0" + buttonValue;
     display.innerText = buttonValue;
+    storeNumber(buttonValue);
   } else if (!display.innerText.includes(buttonValue)) {
     display.innerText += buttonValue;
+    storeNumber(buttonValue);
   }
-
-  storeNumber(buttonValue);
 }
 
-function zeroException(buttonValue) {}
+function zeroException(buttonValue) {
+  if (display.innerText !== "0") {
+    display.innerText += buttonValue;
+    storeNumber(buttonValue);
+  }
+}
 
 function updateDisplayDefault(buttonValue) {
   if (display.innerText === "0" || display.innerText === "") {
