@@ -76,6 +76,8 @@ function decimalException(buttonValue) {
   } else if (!display.innerText.includes(buttonValue)) {
     display.innerText += buttonValue;
   }
+
+  storeNumber(buttonValue);
 }
 
 function zeroException(buttonValue) {}
@@ -86,6 +88,7 @@ function updateDisplayDefault(buttonValue) {
   } else if (display.innerText !== "0" && display.innerText !== "") {
     display.innerText += buttonValue;
   }
+  storeNumber(buttonValue);
 }
 
 function updateDisplay(buttonValue) {
