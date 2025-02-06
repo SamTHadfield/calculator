@@ -114,7 +114,7 @@ function numberButton(button) {
 //   to new arith button
 
 // function colorButton(button) {
-//   button.target.style.backgroundColor = "#7b9e89";
+//   button.target.style.backgroundColor.class  #f8d49b;
 // }
 
 function storeArithOperator(buttonValue) {
@@ -125,8 +125,8 @@ function storeArithOperator(buttonValue) {
 
 function arithOperatorButton(button) {
   const buttonValue = button.target.value;
-  storeArithOperator(buttonValue);
   // colorButton(button);
+  storeArithOperator(buttonValue);
 }
 
 ///////////////////////////////////////////
@@ -218,6 +218,11 @@ function backspace() {
   }
 }
 
+function equals() {
+  if (firstNumStr !== "" && operatorStr !== "" && secondNumStr !== "")
+    operate();
+}
+
 function backgroundOperatorButton(button) {
   const buttonValue = button.target.value;
 
@@ -235,7 +240,7 @@ function backgroundOperatorButton(button) {
       backspace();
       break;
     case "=":
-      operate();
+      equals();
       break;
   }
 }
@@ -266,9 +271,6 @@ backButtons.forEach((button) =>
 // BUGS TO ADDRESS & FEATURES TO ADD //
 /////////////////////
 
-// • May look at refactoring "equals" switch case to go direct to operate function rather than
-//// through a middleman function.
-
 // • Need to refactor if/else statements for number buttons - they are long and cumbersome
 
 // • Refactor arithmetic buttons to highlight when clicked and remove highlight when
@@ -276,16 +278,15 @@ backButtons.forEach((button) =>
 
 // • Numbers run off display - If too many numbers are included in the display, the numbers
 //// will not scroll but rather run out the side of the container and off the page.
-//// - Solution: Look up a scroll option, consult Project page in TOP
-
-// • Display flexes - Display flexes based on numbers.
-//// - Solution: Set display to static value. The issue here is that removing the flex may
-////   compromise remainder of structure. Check size of the display while flexed and maybe
-////   try to recreate size in a static mode.
+//// - Solution: Limit the length of the stored number to the display itself
 
 // • You must hit the "equals" button to return a value - Not really a bug per se, more of a
 //// feature which needs to be added. If two number are ready to be totaled, should be able
 //// to hit any arithmetic operator and spit back the total - rather than requiring user to
 //// explicitly hit the equals button.
+
+// • Equals button is not working properly - if you click it before there is a firstNum,
+//// arithOperator AND secondNum, it returns erroneous values. It should only have the ability
+//// to be clicked if there all of this criteria is met
 
 // • Add keyboard support!
