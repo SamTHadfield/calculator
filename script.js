@@ -58,22 +58,6 @@ function operate() {
 // Button Functions //
 //////////////////////
 
-// Decimal exceptions
-// If variable is empty, we want variable to change to "0" + "."
-// If the variable already holds a decimal, we cannot add another to the variable
-
-// Zero exceptions
-// We cannot add a "0" to an empty variable
-// Zeros cannot come in succession by themselves (e.g. "00000000") unless after a decimal "0.0000"
-
-// function zeroException(buttonValue) {
-//   if (operatorStr === "" && firstNumStr === "") {
-//     firstNumStr = buttonValue;
-//   } else if (operatorStr !== "" && secondNumStr === "") {
-//     secondNumStr = buttonValue;
-//   }
-// }
-
 function updateDisplay() {
   if (operatorStr === "") display.innerText = firstNumStr;
   if (operatorStr !== "") display.innerText = secondNumStr;
@@ -169,7 +153,11 @@ function toggleFirstNum() {
 }
 
 function toggleSecondNum() {
-  if (secondNumStr !== "" && !secondNumStr.includes("-")) {
+  if (
+    secondNumStr !== "" &&
+    secondNumStr !== "0" &&
+    !secondNumStr.includes("-")
+  ) {
     secondNumStr = "-" + secondNumStr;
     display.innerText = secondNumStr;
   } else if (secondNumStr.includes("-")) {
@@ -230,11 +218,6 @@ function backspace() {
   }
 }
 
-// Equals button
-function equals() {
-  operate();
-}
-
 function backgroundOperatorButton(button) {
   const buttonValue = button.target.value;
 
@@ -252,7 +235,7 @@ function backgroundOperatorButton(button) {
       backspace();
       break;
     case "=":
-      equals();
+      operate();
       break;
   }
 }
@@ -286,10 +269,7 @@ backButtons.forEach((button) =>
 // • May look at refactoring "equals" switch case to go direct to operate function rather than
 //// through a middleman function.
 
-// • Can add multiple decimals only in secondNum
-
-// • Disable "0" from being placed in global variables all by itself. This should prevent
-//// successive 0s from being added to display without a leading number. But double check this.
+// • Need to refactor if/else statements for number buttons - they are long and cumbersome
 
 // • Refactor arithmetic buttons to highlight when clicked and remove highlight when
 //// clicked elsewhere
