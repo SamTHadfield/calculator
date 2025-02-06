@@ -17,8 +17,6 @@ function operatorResult(totalNumber) {
 function add(firstNumber, secondNumber) {
   const totalNumber = firstNumber + secondNumber;
   operatorResult(totalNumber);
-
-  // Start here after lunch - these numbers need to be converted back to strings before they are pushed to opeartorResult()
 }
 
 function subtract(firstNumber, secondNumber) {
@@ -106,9 +104,19 @@ function routeNumber(buttonValue) {
 }
 
 function numberButton(button) {
+  // console.log(button);
   const buttonValue = button.target.value;
   routeNumber(buttonValue);
 }
+
+// Number Button Event Listeners
+const numberButtons = Array.from(document.querySelectorAll(".number-button"));
+numberButtons.forEach((button) =>
+  button.addEventListener("click", numberButton)
+);
+numberButtons.forEach((button) =>
+  button.addEventListener("keydown", numberButton)
+);
 
 ///////////////////////////////////////////
 // Arithmetic Operator Button Functions //
@@ -135,6 +143,12 @@ function arithOperatorButton(button) {
   // colorButton(button);
   storeArithOperator(buttonValue);
 }
+
+// Arithmetic Operator Event Listeners
+const arithButtons = Array.from(document.querySelectorAll(".arith-button"));
+arithButtons.forEach((button) =>
+  button.addEventListener("click", arithOperatorButton)
+);
 
 ///////////////////////////////////////////
 // Background Operator Button Functions //
@@ -252,23 +266,7 @@ function backgroundOperatorButton(button) {
   }
 }
 
-//////////////////////
-// Event Listeners //
-/////////////////////
-
-// Number Button Event Listeners
-const numberButtons = Array.from(document.querySelectorAll(".number-button"));
-numberButtons.forEach((button) =>
-  button.addEventListener("click", numberButton)
-);
-
-// Arithmetic Operator Button Event Listeners
-const arithButtons = Array.from(document.querySelectorAll(".arith-button"));
-arithButtons.forEach((button) =>
-  button.addEventListener("click", arithOperatorButton)
-);
-
-// Background Operator Button Event Listeners
+// Background Operator Event Listeners
 const backButtons = Array.from(document.querySelectorAll(".background-button"));
 backButtons.forEach((button) =>
   button.addEventListener("click", backgroundOperatorButton)
@@ -284,10 +282,5 @@ backButtons.forEach((button) =>
 
 // • Refactor arithmetic buttons to highlight when clicked and remove highlight when
 //// clicked elsewhere
-
-// • You must hit the "equals" button to return a value - Not really a bug per se, more of a
-//// feature that needs to be added. If two number are ready to be totaled, should be able
-//// to hit any arithmetic operator and spit back the total - rather than requiring user to
-//// explicitly hit the equals button.
 
 // • Add keyboard support with additional event listeners!
