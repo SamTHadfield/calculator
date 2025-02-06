@@ -64,6 +64,8 @@ function updateDisplay() {
 }
 
 function storeFirstNumber(buttonValue) {
+  if (firstNumStr.length > 9) firstNumStr = firstNumStr.substring(0, 9);
+
   if (firstNumStr === "" && buttonValue === ".") {
     firstNumStr = "0" + buttonValue; // "0."
   } else if (firstNumStr === "") {
@@ -79,6 +81,8 @@ function storeFirstNumber(buttonValue) {
 }
 
 function storeSecondNumber(buttonValue) {
+  if (secondNumStr.length > 9) secondNumStr = secondNumStr.substring(0, 9);
+
   if (secondNumStr === "" && buttonValue === ".") {
     secondNumStr = "0" + buttonValue; // "0."
   } else if (secondNumStr === "") {
@@ -267,26 +271,23 @@ backButtons.forEach((button) =>
   button.addEventListener("click", backgroundOperatorButton)
 );
 
-//////////////////////
+////////////////////////////////////////
 // BUGS TO ADDRESS & FEATURES TO ADD //
-/////////////////////
+///////////////////////////////////////
 
 // • Need to refactor if/else statements for number buttons - they are long and cumbersome
+
+// • Numbers run off display - If too many numbers are included in the display, the numbers
+//// will not scroll but rather run out the side of the container and off the page.
+//// - Solution: Limit the length of the stored number to 10 characters (which is the amount of
+////   characters that can fit in the display).
 
 // • Refactor arithmetic buttons to highlight when clicked and remove highlight when
 //// clicked elsewhere
 
-// • Numbers run off display - If too many numbers are included in the display, the numbers
-//// will not scroll but rather run out the side of the container and off the page.
-//// - Solution: Limit the length of the stored number to the display itself
-
 // • You must hit the "equals" button to return a value - Not really a bug per se, more of a
-//// feature which needs to be added. If two number are ready to be totaled, should be able
+//// feature that needs to be added. If two number are ready to be totaled, should be able
 //// to hit any arithmetic operator and spit back the total - rather than requiring user to
 //// explicitly hit the equals button.
 
-// • Equals button is not working properly - if you click it before there is a firstNum,
-//// arithOperator AND secondNum, it returns erroneous values. It should only have the ability
-//// to be clicked if there all of this criteria is met
-
-// • Add keyboard support!
+// • Add keyboard support with additional event listeners!
