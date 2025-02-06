@@ -65,68 +65,59 @@ function operate() {
 // Zero exceptions
 // We cannot add a "0" to an empty variable
 // Zeros cannot come in succession by themselves (e.g. "00000000") unless after a decimal "0.0000"
-// function storeNumber(buttonValue) {
-//   if (operatorStr === "") {
-//     firstNumStr += buttonValue;
+
+// function zeroException(buttonValue) {
+//   if (operatorStr === "" && firstNumStr === "") {
+//     firstNumStr = buttonValue;
+//   } else if (operatorStr !== "" && secondNumStr === "") {
+//     secondNumStr = buttonValue;
 //   }
 // }
 
-function decimalException(buttonValue) {
-  if (display.innerText === "0") {
-    display.innerText += buttonValue;
-    buttonValue = "0" + buttonValue;
-    storeNumber(buttonValue);
-  } else if (display.innerText === "") {
-    buttonValue = "0" + buttonValue;
-    display.innerText = buttonValue;
-    storeNumber(buttonValue);
-  } else if (!display.innerText.includes(buttonValue)) {
-    display.innerText += buttonValue;
-    storeNumber(buttonValue);
-  }
+function updateDisplay() {
+  if (operatorStr === "") display.innerText = firstNumStr;
+  if (operatorStr !== "") display.innerText = secondNumStr;
 }
 
-function zeroException(buttonValue) {
-  if (display.innerText !== "0") {
-    display.innerText += buttonValue;
-    storeNumber(buttonValue);
+function storeFirstNumber(buttonValue) {
+  if (firstNumStr === "" && buttonValue === ".") {
+    firstNumStr = "0" + buttonValue; // "0."
+  } else if (firstNumStr === "") {
+    firstNumStr = buttonValue; // Place new value if not "."
+  } else if (firstNumStr === "0" && buttonValue !== ".") {
+    firstNumStr = buttonValue; // Replace value if not "." - if "." add to "0"
+  } else if (firstNumStr !== "" && buttonValue !== ".") {
+    firstNumStr += buttonValue; // concatenate non-decimal values
+  } else if (!firstNumStr.includes(".") && buttonValue === ".") {
+    firstNumStr += buttonValue; // concatenate decimal value if not already present in string
   }
+  updateDisplay();
 }
 
-function updateDisplayDefault(buttonValue) {
-  if (display.innerText === "0" || display.innerText === "") {
-    display.innerText = buttonValue;
-  } else if (display.innerText !== "0" && display.innerText !== "") {
-    display.innerText += buttonValue;
+function storeSecondNumber(buttonValue) {
+  if (secondNumStr === "" && buttonValue === ".") {
+    secondNumStr = "0" + buttonValue; // "0."
+  } else if (secondNumStr === "") {
+    secondNumStr = buttonValue; // Place new value if not "."
+  } else if (secondNumStr === "0" && buttonValue !== ".") {
+    secondNumStr = buttonValue; // Replace value if not "." - if "." add to "0"
+  } else if (secondNumStr !== "" && buttonValue !== ".") {
+    secondNumStr += buttonValue; // concatenate non-decimal values
+  } else if (!secondNumStr.includes(".") && buttonValue === ".") {
+    secondNumStr += buttonValue; // concatenate decimal value if not already present in string
   }
-  storeNumber(buttonValue);
+  updateDisplay();
 }
 
-function updateDisplay(buttonValue) {
-  switch (buttonValue) {
-    case ".":
-      decimalException(buttonValue);
-      break;
-    case "0":
-      zeroException(buttonValue);
-      break;
-    default:
-      updateDisplayDefault(buttonValue);
-  }
-
-  // "." can't be used more than once
-  // "." must come after either a 0 or an integer
-  // "0" cannot be added if there is already a single "0" in display
-  // A single "0" in display will need to be replaced unless followed by a decimal
+function routeNumber(buttonValue) {
+  if (operatorStr === "") storeFirstNumber(buttonValue);
+  if (operatorStr !== "") storeSecondNumber(buttonValue);
 }
 
 function numberButton(button) {
   const buttonValue = button.target.value;
-  updateDisplay(buttonValue);
+  routeNumber(buttonValue);
 }
-
-// 1. If displayWindow.innerText is only "0"
-// 2. Cannot lead with "0" in secondNumber unless there is a decimal
 
 ///////////////////////////////////////////
 // Arithmetic Operator Button Functions //
