@@ -7,8 +7,9 @@ let display = document.querySelector("#display-window");
 // Math Operator Helper Functions //
 ////////////////////////////////////
 function operatorResult(totalNumber) {
-  display.innerText = totalNumber;
-  firstNumStr = totalNumber;
+  const numToString = totalNumber.toString();
+  display.innerText = numToString;
+  firstNumStr = numToString;
   secondNumStr = "";
   operatorStr = "";
 }
@@ -16,6 +17,8 @@ function operatorResult(totalNumber) {
 function add(firstNumber, secondNumber) {
   const totalNumber = firstNumber + secondNumber;
   operatorResult(totalNumber);
+
+  // Start here after lunch - these numbers need to be converted back to strings before they are pushed to opeartorResult()
 }
 
 function subtract(firstNumber, secondNumber) {
@@ -277,10 +280,7 @@ backButtons.forEach((button) =>
 
 // • Need to refactor if/else statements for number buttons - they are long and cumbersome
 
-// • Numbers run off display - If too many numbers are included in the display, the numbers
-//// will not scroll but rather run out the side of the container and off the page.
-//// - Solution: Limit the length of the stored number to 10 characters (which is the amount of
-////   characters that can fit in the display).
+// • Need to build in an "e" for error if the number is too large (goes past 10 characters)
 
 // • Refactor arithmetic buttons to highlight when clicked and remove highlight when
 //// clicked elsewhere
