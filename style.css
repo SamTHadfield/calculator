@@ -38,9 +38,9 @@ body {
   display: flex;
   justify-content: right;
   align-items: center;
-  font-size: 5rem;
+  font-size: 4.75rem;
   padding-bottom: 1rem;
-  padding-right: 1rem;
+  padding-right: 6px;
   margin-bottom: 2rem;
   border-radius: 1rem;
   border: 0.1rem #d95d39 solid;
