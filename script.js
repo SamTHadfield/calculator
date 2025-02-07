@@ -10,8 +10,8 @@ function operatorResult(totalNumber) {
   const numToString = totalNumber.toString();
   display.innerText = numToString;
   firstNumStr = numToString;
-  secondNumStr = "";
   operatorStr = "";
+  secondNumStr = "";
 }
 
 function add(firstNumber, secondNumber) {
@@ -107,16 +107,6 @@ function numberClick(button) {
   let buttonValue = button.target.value;
   routeNumber(buttonValue);
 }
-
-// function numberKeydown(button) {
-//   let buttonValue = button.key;
-//   routeNumber(buttonValue);
-// }
-
-// function numberButton(button) {
-//   let buttonValue = button.target.value;
-//   routeNumber(buttonValue);
-// }
 
 // Number Button Event Listener
 const numberButtons = Array.from(document.querySelectorAll(".number-button"));
@@ -255,7 +245,6 @@ function backgroundOperatorClick(button) {
   let buttonValue = button.target.value;
   switch (buttonValue) {
     case "AC":
-    case "c":
       allClear();
       break;
     case "+/-":
@@ -279,35 +268,39 @@ backButtons.forEach((button) =>
   button.addEventListener("click", backgroundOperatorClick)
 );
 
-const allButtons = Array.from(document.querySelectorAll(".button"));
-allButtons.forEach((button) =>
-  button.addEventListener("keydown", (event) => {
-    const key = event.key;
-    console.log(key);
+// Keyboard Event Listeners
+window.addEventListener("keydown", (event) => {
+  const key = event.key;
+  // console.log(key);
 
-    if (!isNaN(key) || key === ".") {
-      routeNumber(key);
-    } else
-      switch (key) {
-        case "+":
-        case "-":
-        case "/":
-        case "*":
-          storeArithOperator(key);
-          break;
-        case "c": // All Clear
-        case "Alt" + "-": // Toggle negative
-        case "%":
-        case "Backspace":
-        case "=": // Equals
-        case "Enter": // Equals alternative
-          backgroundOperatorButton(key);
-      }
-  })
-);
-
-// Start here tomorrow (02/07). Keydown events cause all keys to fire at once. Figure out how to
-// make proper exceptions for these so that only the keys you want to press are fired.
+  if (!isNaN(key) || key === ".") {
+    routeNumber(key);
+  } else
+    switch (key) {
+      case "+":
+      case "-":
+      case "/":
+      case "*":
+        storeArithOperator(key);
+        break;
+      case "c": // All Clear // Works
+        allClear();
+        break;
+      case "–": // Toggle negative // Works
+        toggleNegative();
+        break;
+      case "%": // Works
+        percentage();
+        break;
+      case "Backspace": // Works
+        backspace();
+        break;
+      case "=":
+      case "Enter":
+        equals();
+        break;
+    }
+});
 
 ////////////////////////////////////////
 // BUGS TO ADDRESS & FEATURES TO ADD //
@@ -319,5 +312,3 @@ allButtons.forEach((button) =>
 
 // • Refactor arithmetic buttons to highlight when clicked and remove highlight when
 //// clicked elsewhere
-
-// • Add keyboard support with additional event listeners!
