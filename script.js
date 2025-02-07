@@ -43,13 +43,13 @@ function operate() {
     case "+":
       add(firstNumber, secondNumber);
       break;
-    case "–":
+    case "-":
       subtract(firstNumber, secondNumber);
       break;
     case "*":
       multiply(firstNumber, secondNumber);
       break;
-    case "÷":
+    case "/":
       divide(firstNumber, secondNumber);
       break;
   }
@@ -103,19 +103,26 @@ function routeNumber(buttonValue) {
   if (operatorStr !== "") storeSecondNumber(buttonValue);
 }
 
-function numberButton(button) {
-  // console.log(button);
-  const buttonValue = button.target.value;
+function numberClick(button) {
+  let buttonValue = button.target.value;
   routeNumber(buttonValue);
 }
 
-// Number Button Event Listeners
+// function numberKeydown(button) {
+//   let buttonValue = button.key;
+//   routeNumber(buttonValue);
+// }
+
+// function numberButton(button) {
+//   let buttonValue = button.target.value;
+//   routeNumber(buttonValue);
+// }
+
+// Number Button Event Listener
 const numberButtons = Array.from(document.querySelectorAll(".number-button"));
-numberButtons.forEach((button) =>
-  button.addEventListener("click", numberButton)
-);
-numberButtons.forEach((button) =>
-  button.addEventListener("keydown", numberButton)
+
+numberButtons.forEach(
+  (button) => button.addEventListener("click", numberClick) // numberButton
 );
 
 ///////////////////////////////////////////
@@ -271,6 +278,30 @@ const backButtons = Array.from(document.querySelectorAll(".background-button"));
 backButtons.forEach((button) =>
   button.addEventListener("click", backgroundOperatorButton)
 );
+
+const allButtons = Array.from(document.querySelectorAll(".button"));
+allButtons.forEach((button) =>
+  button.addEventListener("keydown", (event) => {
+    const key = event.key;
+
+    if (!isNaN(key) || key === ".") {
+      console.log(key);
+      routeNumber(key);
+    } else
+      switch (key) {
+        case "+":
+        case "-":
+        case "/":
+        case "*":
+          console.log(key);
+          storeArithOperator(key);
+          break;
+      }
+  })
+);
+
+// Start here tomorrow (02/07). Keydown events cause all keys to fire at once. Figure out how to
+// make proper exceptions for these so that only the keys you want to press are fired.
 
 ////////////////////////////////////////
 // BUGS TO ADDRESS & FEATURES TO ADD //
