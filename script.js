@@ -6,16 +6,22 @@ let display = document.querySelector("#display-window");
 /////////////////////////////////////
 // Math Operator Helper Functions //
 ////////////////////////////////////
+
 function operatorResult(totalNumber) {
-  const numToString = totalNumber.toString();
-  display.innerText = numToString;
-  firstNumStr = numToString;
+  let str = totalNumber.toString();
+  if (str.length > 9) {
+    let num = Number(str);
+    str = num.toFixed(9);
+  }
+
+  display.innerText = str;
+  firstNumStr = str;
   operatorStr = "";
   secondNumStr = "";
 }
 
 function add(firstNumber, secondNumber) {
-  const totalNumber = firstNumber + secondNumber;
+  const totalNumber = firstNumber + secondNumber; //const totalNumber =
   operatorResult(totalNumber);
 }
 
@@ -308,7 +314,9 @@ window.addEventListener("keydown", (event) => {
 
 // • Need to refactor if/else statements for number buttons - they are long and cumbersome
 
-// • Need to build in an "e" for error if the number is too large (goes past 10 characters)
+// • Need to round the number to "0.*******" if the calculation goes passed 10 characters
 
 // • Refactor arithmetic buttons to highlight when clicked and remove highlight when
 //// clicked elsewhere
+
+// • Write snarky message if user attempts to divide by "0"
