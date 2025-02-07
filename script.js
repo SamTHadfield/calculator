@@ -251,14 +251,14 @@ function equals() {
     operate();
 }
 
-function backgroundOperatorButton(button) {
-  const buttonValue = button.target.value;
-
+function backgroundOperatorClick(button) {
+  let buttonValue = button.target.value;
   switch (buttonValue) {
     case "AC":
+    case "c":
       allClear();
       break;
-    case "+/–":
+    case "+/-":
       toggleNegative();
       break;
     case "%":
@@ -276,16 +276,16 @@ function backgroundOperatorButton(button) {
 // Background Operator Event Listeners
 const backButtons = Array.from(document.querySelectorAll(".background-button"));
 backButtons.forEach((button) =>
-  button.addEventListener("click", backgroundOperatorButton)
+  button.addEventListener("click", backgroundOperatorClick)
 );
 
 const allButtons = Array.from(document.querySelectorAll(".button"));
 allButtons.forEach((button) =>
   button.addEventListener("keydown", (event) => {
     const key = event.key;
+    console.log(key);
 
     if (!isNaN(key) || key === ".") {
-      console.log(key);
       routeNumber(key);
     } else
       switch (key) {
@@ -293,9 +293,15 @@ allButtons.forEach((button) =>
         case "-":
         case "/":
         case "*":
-          console.log(key);
           storeArithOperator(key);
           break;
+        case "c": // All Clear
+        case "Alt" + "-": // Toggle negative
+        case "%":
+        case "Backspace":
+        case "=": // Equals
+        case "Enter": // Equals alternative
+          backgroundOperatorButton(key);
       }
   })
 );
