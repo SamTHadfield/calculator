@@ -19,9 +19,9 @@ function divideByZero() {
 function operatorResult(totalNumber) {
   let str = totalNumber.toString();
 
-  if (str.length > 9) {
+  if (str.length > 8) {
     let num = Number(str);
-    str = num.toFixed(9);
+    str = num.toFixed(8);
   }
 
   display.innerText = str;
