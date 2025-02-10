@@ -226,33 +226,32 @@ function percentage() {
 }
 
 // Back Button
-function removeLastValue(numString, display) {
+function popDisplay() {
   const displayArr = display.innerText.split("");
   displayArr.pop();
   const newDisplayStr = displayArr.join("");
   display.innerText = newDisplayStr;
 
-  const numStringArr = numString.split("");
-  numStringArr.pop();
-  const newNumStr = numStringArr.join("");
-
-  if (operatorStr === "") {
-    firstNumStr = newNumStr;
-  } else if (operatorStr !== "") {
-    secondNumStr = newNumStr;
-  }
-}
-
-function backspace() {
-  if (operatorStr === "") {
-    removeLastValue(firstNumStr, display);
-  } else if (operatorStr !== "") {
-    removeLastValue(secondNumStr, display);
-  }
-
   if (display.innerText === "") {
     display.innerText = "0";
   }
+}
+
+function popString() {
+  if (operatorStr === "") {
+    const numberArr = firstNumStr.split("");
+    numberArr.pop();
+    firstNumStr = numberArr.join("");
+  } else if (operatorStr !== "") {
+    const numberArr = secondNumStr.split("");
+    numberArr.pop();
+    secondNumStr = numberArr.join("");
+  }
+}
+
+function removeLastValue() {
+  popString();
+  popDisplay();
 }
 
 function equals() {
@@ -273,7 +272,7 @@ function backgroundOperatorClick(button) {
       percentage();
       break;
     case "back":
-      backspace();
+      removeLastValue();
       break;
     case "=":
       equals();
@@ -300,7 +299,6 @@ function highlight(e) {
 
 function removeHighlight(e) {
   const buttonClass = e.target.classList.value;
-  console.log(buttonClass);
 
   switch (buttonClass) {
     case "button number-button audio":
