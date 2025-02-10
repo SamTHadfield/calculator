@@ -15,7 +15,6 @@ function divideByZero() {
   secondNumStr = "";
 }
 
-// Refactor - start here Monday. Massive number still don't round properly.
 function operatorResult(totalNumber) {
   let str = totalNumber.toString();
 
@@ -144,16 +143,6 @@ numberButtons.forEach((button) =>
 ///////////////////////////////////////////
 // Arithmetic Operator Button Functions //
 //////////////////////////////////////////
-
-// Pseudocode //
-// • Highlight Arith button when clicked
-// • Undo highlight when number button is clicked
-// • Undo highlight when a different arith button is clicked and "move" highlight
-//   to new arith button
-
-// function colorButton(button) {
-//   button.target.style.backgroundColor.class  #f8d49b;
-// }
 
 function storeArithOperator(buttonValue) {
   if (operatorStr === "") {
@@ -310,23 +299,19 @@ function highlight(e) {
 }
 
 function removeHighlight(e) {
-  if (e.target.classList.value.includes("number-button")) {
-    e.target.style.backgroundColor = "#f0a202";
-  } else if (
-    e.target.classList.value.includes("background-button") ||
-    e.target.classList.value.includes("arith-button")
-  ) {
-    e.target.style.backgroundColor = "#d95d39";
+  const buttonClass = e.target.classList.value;
+  console.log(buttonClass);
+
+  switch (buttonClass) {
+    case "button number-button audio":
+      e.target.style.backgroundColor = "#f0a202";
+      break;
+    case "button arith-button audio":
+    case "button background-button audio":
+      e.target.style.backgroundColor = "#d95d39";
+      break;
   }
 }
-
-// const allButtons = Array.from(document.querySelectorAll(".button"));
-// allButtons.forEach((button) => {
-//   button.addEventListener("mousedown", highlight);
-// });
-// allButtons.forEach((button) => {
-//   button.addEventListener("mouseup", removeHighlight);
-// });
 
 // Keyboard Event Listeners
 window.addEventListener("keydown", (event) => {
@@ -367,7 +352,7 @@ window.addEventListener("keydown", (event) => {
 
 // 4) Need to refactor if/else statements for number buttons - they are long and cumbersome
 
-// 3) Refactor arithmetic buttons to highlight when clicked and remove highlight when
+// ✅ 3) Refactor arithmetic buttons to highlight when clicked and remove highlight when
 //// clicked elsewhere
 
 // ✅ 2) Write snarky message if user attempts to divide by "0"
