@@ -7,8 +7,18 @@ let display = document.querySelector("#display-window");
 // Math Operator Helper Functions //
 ////////////////////////////////////
 
+function divideByZero() {
+  const error = "cringe";
+  display.innerText = error;
+  firstNumStr = error;
+  operatorStr = "";
+  secondNumStr = "";
+}
+
+// Refactor - start here Monday. Massive number still don't round properly.
 function operatorResult(totalNumber) {
   let str = totalNumber.toString();
+
   if (str.length > 9) {
     let num = Number(str);
     str = num.toFixed(9);
@@ -36,8 +46,12 @@ function multiply(firstNumber, secondNumber) {
 }
 
 function divide(firstNumber, secondNumber) {
-  const totalNumber = firstNumber / secondNumber;
-  operatorResult(totalNumber);
+  if (secondNumber === 0) {
+    divideByZero();
+  } else {
+    const totalNumber = firstNumber / secondNumber;
+    operatorResult(totalNumber);
+  }
 }
 
 // Operate Function
@@ -312,11 +326,11 @@ window.addEventListener("keydown", (event) => {
 // BUGS TO ADDRESS & FEATURES TO ADD //
 ///////////////////////////////////////
 
-// • Need to refactor if/else statements for number buttons - they are long and cumbersome
+// 4) Need to refactor if/else statements for number buttons - they are long and cumbersome
 
-// • Need to round the number to "0.*******" if the calculation goes passed 10 characters
-
-// • Refactor arithmetic buttons to highlight when clicked and remove highlight when
+// 3) Refactor arithmetic buttons to highlight when clicked and remove highlight when
 //// clicked elsewhere
 
-// • Write snarky message if user attempts to divide by "0"
+// ✅ 2) Write snarky message if user attempts to divide by "0"
+
+// ✅ 1) Large totals still run off of display (Appears to be working)
