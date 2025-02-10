@@ -85,7 +85,7 @@ function updateDisplay() {
 }
 
 function storeFirstNumber(buttonValue) {
-  if (firstNumStr.length > 9) firstNumStr = firstNumStr.substring(0, 9);
+  if (firstNumStr.length > 8) firstNumStr = firstNumStr.substring(0, 8);
 
   if (firstNumStr === "" && buttonValue === ".") {
     firstNumStr = "0" + buttonValue; // "0."
@@ -102,7 +102,7 @@ function storeFirstNumber(buttonValue) {
 }
 
 function storeSecondNumber(buttonValue) {
-  if (secondNumStr.length > 9) secondNumStr = secondNumStr.substring(0, 9);
+  if (secondNumStr.length > 8) secondNumStr = secondNumStr.substring(0, 8);
 
   if (secondNumStr === "" && buttonValue === ".") {
     secondNumStr = "0" + buttonValue; // "0."
@@ -128,11 +128,17 @@ function numberClick(button) {
   routeNumber(buttonValue);
 }
 
-// Number Button Event Listener
+// Number Button Event Listeners
 const numberButtons = Array.from(document.querySelectorAll(".number-button"));
 
 numberButtons.forEach(
   (button) => button.addEventListener("click", numberClick) // numberButton
+);
+numberButtons.forEach((button) =>
+  button.addEventListener("mousedown", highlight)
+);
+numberButtons.forEach((button) =>
+  button.addEventListener("mouseup", removeHighlight)
 );
 
 ///////////////////////////////////////////
@@ -165,6 +171,10 @@ function arithOperatorButton(button) {
 const arithButtons = Array.from(document.querySelectorAll(".arith-button"));
 arithButtons.forEach((button) =>
   button.addEventListener("click", arithOperatorButton)
+);
+arithButtons.forEach((button) => button.addEventListener("focus", highlight));
+arithButtons.forEach((button) =>
+  button.addEventListener("blur", removeHighlight)
 );
 
 ///////////////////////////////////////////
@@ -287,11 +297,40 @@ const backButtons = Array.from(document.querySelectorAll(".background-button"));
 backButtons.forEach((button) =>
   button.addEventListener("click", backgroundOperatorClick)
 );
+backButtons.forEach((button) =>
+  button.addEventListener("mousedown", highlight)
+);
+backButtons.forEach((button) =>
+  button.addEventListener("mouseup", removeHighlight)
+);
+
+// Highlighting Buttons On Click
+function highlight(e) {
+  e.target.style.backgroundColor = "#A9A9A9";
+}
+
+function removeHighlight(e) {
+  if (e.target.classList.value.includes("number-button")) {
+    e.target.style.backgroundColor = "#f0a202";
+  } else if (
+    e.target.classList.value.includes("background-button") ||
+    e.target.classList.value.includes("arith-button")
+  ) {
+    e.target.style.backgroundColor = "#d95d39";
+  }
+}
+
+// const allButtons = Array.from(document.querySelectorAll(".button"));
+// allButtons.forEach((button) => {
+//   button.addEventListener("mousedown", highlight);
+// });
+// allButtons.forEach((button) => {
+//   button.addEventListener("mouseup", removeHighlight);
+// });
 
 // Keyboard Event Listeners
 window.addEventListener("keydown", (event) => {
   const key = event.key;
-  // console.log(key);
 
   if (!isNaN(key) || key === ".") {
     routeNumber(key);
