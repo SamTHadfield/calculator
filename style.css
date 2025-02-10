@@ -6,6 +6,11 @@
 }
 
 /* Remove scroll, but maintain functionality */
+.audio {
+  font-family: "Audiowide", serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
 body {
   min-height: 100vh;
@@ -16,8 +21,8 @@ body {
 }
 
 #container {
-  height: 650px;
-  width: 500px;
+  height: 725px;
+  width: 575px;
   display: flex;
   flex-direction: column;
   background-color: #0e1428; /* rgb(41, 98, 255);*/
@@ -32,13 +37,12 @@ body {
 }
 
 #display-window {
-  /* background-color: #5dbb63; Fern Green #5dbb63 Parakeet Green: #03c04a  */
   background-color: #7b9e89;
   color: #0e1428;
   display: flex;
   justify-content: right;
   align-items: center;
-  font-size: 4.75rem;
+  font-size: 4rem;
   padding-bottom: 1rem;
   padding-right: 1rem;
   margin-bottom: 2rem;
@@ -50,7 +54,6 @@ body {
   flex: 1;
   border-radius: 1rem;
   font-size: 2rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   background-color: #f0a202;
   color: #0e1428;
 }
