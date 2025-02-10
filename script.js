@@ -19,9 +19,9 @@ function divideByZero() {
 function operatorResult(totalNumber) {
   let str = totalNumber.toString();
 
-  if (str.length > 9) {
+  if (str.length > 8) {
     let num = Number(str);
-    str = num.toFixed(9);
+    str = num.toFixed(8);
   }
 
   display.innerText = str;
@@ -138,15 +138,12 @@ numberButtons.forEach(
 ///////////////////////////////////////////
 // Arithmetic Operator Button Functions //
 //////////////////////////////////////////
+// function highlightButton(e) {
+//   e.target.style.backgroundColor = "#f8d49b";
+// }
 
-// Pseudocode //
-// • Highlight Arith button when clicked
-// • Undo highlight when number button is clicked
-// • Undo highlight when a different arith button is clicked and "move" highlight
-//   to new arith button
-
-// function colorButton(button) {
-//   button.target.style.backgroundColor.class  #f8d49b;
+// function removeHighlight(e) {
+//   e.target.style.backgroundColor = "#d95d39";
 // }
 
 function storeArithOperator(buttonValue) {
@@ -157,7 +154,6 @@ function storeArithOperator(buttonValue) {
 
 function arithOperatorButton(button) {
   const buttonValue = button.target.value;
-  // colorButton(button);
   storeArithOperator(buttonValue);
 }
 
@@ -166,6 +162,12 @@ const arithButtons = Array.from(document.querySelectorAll(".arith-button"));
 arithButtons.forEach((button) =>
   button.addEventListener("click", arithOperatorButton)
 );
+// arithButtons.forEach((button) =>
+//   button.addEventListener("focus", highlightButton)
+// );
+// arithButtons.forEach((button) =>
+//   button.addEventListener("blur", removeHighlight)
+// );
 
 ///////////////////////////////////////////
 // Background Operator Button Functions //
@@ -326,10 +328,19 @@ window.addEventListener("keydown", (event) => {
 // BUGS TO ADDRESS & FEATURES TO ADD //
 ///////////////////////////////////////
 
-// 4) Need to refactor if/else statements for number buttons - they are long and cumbersome
+// 5) Need to refactor if/else statements for number buttons - they are long and cumbersome.
+//// For that matter, review entire codebase before completing the project to ensure that
+//// you have simplified as much as possible.
+
+// 4) Look for a more engaging/cooler font-style.
+// Start here after lunch
 
 // 3) Refactor arithmetic buttons to highlight when clicked and remove highlight when
 //// clicked elsewhere
+
+// 3) some numbers still run off the page (8/3, for example.) It seems if they begin with 0
+// and a decimal,that is not a problem. However, when beginning with a whole number, it is
+// an issue
 
 // ✅ 2) Write snarky message if user attempts to divide by "0"
 
