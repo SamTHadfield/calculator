@@ -69,46 +69,32 @@ function operate() {
   }
 }
 
-///////////////////////
-// Button Functions //
-//////////////////////
+//////////////////////////////
+// Number Button Functions //
+//////////////////////////////
 
 function updateDisplay() {
   if (operatorStr === "") display.innerText = firstNumStr;
   if (operatorStr !== "") display.innerText = secondNumStr;
 }
 
-function storeFirstNumber(buttonValue) {
-  if (firstNumStr.length > 8) firstNumStr = firstNumStr.substring(0, 8);
+function storeNumber(buttonValue, numStr, maxValue) {
+  if (numStr.length >= maxValue) return numStr;
 
-  if (firstNumStr === "" && buttonValue === ".") {
-    firstNumStr = "0" + buttonValue; // "0."
-  } else if (firstNumStr === "") {
-    firstNumStr = buttonValue; // Place new value if not "."
-  } else if (firstNumStr === "0" && buttonValue !== ".") {
-    firstNumStr = buttonValue; // Replace value if not "." - if "." add to "0"
-  } else if (firstNumStr !== "" && buttonValue !== ".") {
-    firstNumStr += buttonValue; // concatenate non-decimal values
-  } else if (!firstNumStr.includes(".") && buttonValue === ".") {
-    firstNumStr += buttonValue; // concatenate decimal value if not already present in string
-  }
+  if (buttonValue === "." && numStr === "") return "0.";
+  if (buttonValue === "." && numStr.includes(".")) return numStr;
+  if (numStr === "0" && buttonValue !== ".") return buttonValue;
+
+  return numStr + buttonValue;
+}
+
+function storeFirstNumber(buttonValue) {
+  firstNumStr = storeNumber(buttonValue, firstNumStr, 9);
   updateDisplay();
 }
 
 function storeSecondNumber(buttonValue) {
-  if (secondNumStr.length > 8) secondNumStr = secondNumStr.substring(0, 8);
-
-  if (secondNumStr === "" && buttonValue === ".") {
-    secondNumStr = "0" + buttonValue; // "0."
-  } else if (secondNumStr === "") {
-    secondNumStr = buttonValue; // Place new value if not "."
-  } else if (secondNumStr === "0" && buttonValue !== ".") {
-    secondNumStr = buttonValue; // Replace value if not "." - if "." add to "0"
-  } else if (secondNumStr !== "" && buttonValue !== ".") {
-    secondNumStr += buttonValue; // concatenate non-decimal values
-  } else if (!secondNumStr.includes(".") && buttonValue === ".") {
-    secondNumStr += buttonValue; // concatenate decimal value if not already present in string
-  }
+  secondNumStr = storeNumber(buttonValue, secondNumStr, 9);
   updateDisplay();
 }
 
@@ -247,6 +233,7 @@ function backspace() {
   popDisplay();
 }
 
+// Equals Button
 function equals() {
   if (firstNumStr !== "" && operatorStr !== "" && secondNumStr !== "")
     operate();
@@ -336,16 +323,3 @@ window.addEventListener("keydown", (event) => {
         break;
     }
 });
-
-////////////////////////////////////////
-// BUGS TO ADDRESS & FEATURES TO ADD //
-///////////////////////////////////////
-
-// 4) Need to refactor if/else statements for number buttons - they are long and cumbersome
-
-// ✅ 3) Refactor arithmetic buttons to highlight when clicked and remove highlight when
-//// clicked elsewhere
-
-// ✅ 2) Write snarky message if user attempts to divide by "0"
-
-// ✅ 1) Large totals still run off of display (Appears to be working)
