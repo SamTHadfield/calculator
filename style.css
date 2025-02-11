@@ -21,8 +21,8 @@ body {
 }
 
 #container {
-  height: 625px;
-  width: 575px;
+  height: 550px;
+  width: 475px;
   display: flex;
   flex-direction: column;
   background-color: #0e1428; /* rgb(41, 98, 255);*/
