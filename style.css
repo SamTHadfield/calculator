@@ -21,7 +21,7 @@ body {
 }
 
 #container {
-  height: 725px;
+  height: 625px;
   width: 575px;
   display: flex;
   flex-direction: column;
