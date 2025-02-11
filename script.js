@@ -117,7 +117,7 @@ function storeSecondNumber(buttonValue) {
   updateDisplay();
 }
 
-function routeNumber(buttonValue) {
+function handleNumberInput(buttonValue) {
   if (operatorStr === "") storeFirstNumber(buttonValue);
   if (operatorStr !== "") storeSecondNumber(buttonValue);
 }
@@ -247,7 +247,7 @@ function popString() {
   }
 }
 
-function removeLastValue() {
+function backspace() {
   popString();
   popDisplay();
 }
@@ -270,7 +270,7 @@ function backgroundOperatorClick(button) {
       percentage();
       break;
     case "back":
-      removeLastValue();
+      backspace();
       break;
     case "=":
       equals();
