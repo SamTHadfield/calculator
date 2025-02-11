@@ -42,7 +42,7 @@ body {
   display: flex;
   justify-content: right;
   align-items: center;
-  font-size: 4rem;
+  font-size: 3.975rem;
   padding-bottom: 1rem;
   padding-right: 1rem;
   margin-bottom: 2rem;
@@ -53,6 +53,7 @@ body {
 .button {
   flex: 1;
   border-radius: 1rem;
+  border: 1px solid #0e1428;
   font-size: 2rem;
   background-color: #f0a202;
   color: #0e1428;
@@ -73,9 +74,4 @@ Color Palette
 • Cinnabar - #D95D39
 • Oxford Blue - #0E1428
 • Cambridge Blue - #7B9E89
-
-Background Color Options
-• Charcoal Gray - #333333
-• Dark Slate Gray - #2F4F4F
-• Oxford Blue - #0E1428
-*/
+• Steel Grey - #A9A9A9
