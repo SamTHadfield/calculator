@@ -209,19 +209,17 @@ function toggleNegative() {
 }
 
 // Percentage Button
+function calculatePercentage(numStr) {
+  return (Number(numStr) / 100).toString();
+}
+
 function percentage() {
-  let realNum = 0;
-  let backToString = "";
   if (operatorStr === "") {
-    realNum = Number(firstNumStr) / 100;
-    backToString = realNum.toString();
-    display.innerText = backToString;
-    firstNumStr = backToString;
-  } else if (operatorStr !== "") {
-    realNum = Number(secondNumStr) / 100;
-    backToString = realNum.toString();
-    display.innerText = backToString;
-    secondNumStr = backToString;
+    firstNumStr = calculatePercentage(firstNumStr);
+    display.innerText = firstNumStr;
+  } else {
+    secondNumStr = calculatePercentage(secondNumStr);
+    display.innerText = secondNumStr;
   }
 }
 
