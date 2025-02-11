@@ -17,14 +17,9 @@ function divideByZero() {
 
 function operatorResult(totalNumber) {
   let str = totalNumber.toString();
-
-  if (str.length > 8) {
-    let num = Number(str);
-    str = num.toFixed(8);
-  }
-
-  display.innerText = str;
-  firstNumStr = str;
+  let fixedStr = str.substring(0, 8);
+  display.innerText = fixedStr;
+  firstNumStr = fixedStr;
   operatorStr = "";
   secondNumStr = "";
 }
@@ -117,14 +112,14 @@ function storeSecondNumber(buttonValue) {
   updateDisplay();
 }
 
-function handleNumberInput(buttonValue) {
+function handleInputValue(buttonValue) {
   if (operatorStr === "") storeFirstNumber(buttonValue);
   if (operatorStr !== "") storeSecondNumber(buttonValue);
 }
 
 function numberClick(button) {
   let buttonValue = button.target.value;
-  routeNumber(buttonValue);
+  handleInputValue(buttonValue);
 }
 
 // Number Button Event Listeners
@@ -314,7 +309,7 @@ window.addEventListener("keydown", (event) => {
   const key = event.key;
 
   if (!isNaN(key) || key === ".") {
-    routeNumber(key);
+    handleInputValue(key);
   } else
     switch (key) {
       case "+":
